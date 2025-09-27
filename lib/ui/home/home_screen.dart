@@ -6,12 +6,12 @@ import 'package:islami_app/ui/home/tabs/hadeth_tab.dart';
 import 'package:islami_app/ui/home/tabs/quran_tab/quran_tab.dart';
 import 'package:islami_app/ui/home/tabs/radio_tab.dart';
 import 'package:islami_app/ui/home/tabs/sebah_tab.dart';
-import 'package:islami_app/ui/home/tabs/time-tab.dart';
+import 'package:islami_app/ui/home/tabs/time_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/HomeScreen";
 
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

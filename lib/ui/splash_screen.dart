@@ -54,4 +54,3 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 }
 
-//HEROES10KDAY

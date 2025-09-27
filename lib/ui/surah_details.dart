@@ -8,7 +8,7 @@ import '../core/styles/colors.dart';
 class SurahDetails extends StatefulWidget {
   static const String routeName = "/SurahDetailsScreen";
 
-  SurahDetails({super.key});
+  const SurahDetails({super.key});
 
   @override
   State<SurahDetails> createState() => _SurahDetailsState();
@@ -32,7 +32,7 @@ class _SurahDetailsState extends State<SurahDetails> {
         backgroundColor: Colors.transparent,
         foregroundColor: AppColors.gold,
         centerTitle: true,
-        title: Text("${surah.surahEn}", style: TextStyles.mediumLabel()),
+        title: Text(surah.surahEn, style: TextStyles.mediumLabel()),
       ),
       body: Center(
         child:
