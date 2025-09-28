@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/model/surah_dm.dart';
-import 'package:islami_app/ui/surah_details.dart';
 
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
@@ -8,17 +7,15 @@ import '../../../../core/styles/text_styles.dart';
 class SurahCard extends StatelessWidget {
   final SurahDM surah;
 
-  const SurahCard({required this.surah, super.key});
+  final Function(SurahDM) onSurahClick;
+
+  const SurahCard({required this.surah,required this.onSurahClick, super.key});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          SurahDetails.routeName,
-          arguments: surah,
-        );
+       onSurahClick(surah);
       },
       child: Row(
         children: [

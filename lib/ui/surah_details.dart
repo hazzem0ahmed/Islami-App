@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/core/styles/text_styles.dart';
 import 'package:islami_app/model/surah_dm.dart';
+import 'package:islami_app/ui/widget/content_details_widget.dart';
 
 import '../core/styles/colors.dart';
 
@@ -40,35 +41,9 @@ class _SurahDetailsState extends State<SurahDetails> {
                 ? CircularProgressIndicator()
                 : Directionality(
                   textDirection: TextDirection.rtl,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Image.asset("assets/images/img_right_corner.png"),
-                            Expanded(
-                              child: Text(
-                                surah.surahAr,
-                                style: TextStyles.mediumLabel(),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            Image.asset("assets/images/img_left_corner.png"),
-                          ],
-                        ),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          padding: EdgeInsets.all(16),
-                          child: Text(
-                            content ?? "",
-                            style: TextStyles.largeBody(),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: ContentDetailsWidget(
+                    title: surah.surahAr,
+                    content: content ?? "",
                   ),
                 ),
       ),
