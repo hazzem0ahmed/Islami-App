@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:islami_app/core/styles/colors.dart';
 import 'package:islami_app/core/styles/text_styles.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../home/home_screen.dart';
 import '../widget/intro_screen.dart';
 
 class IntroScreenDetails extends StatefulWidget {
@@ -14,7 +15,8 @@ class IntroScreenDetails extends StatefulWidget {
 }
 
 class _IntroScreenDetailsState extends State<IntroScreenDetails> {
-  PageController controller = PageController();
+  final PageController _pageController = PageController();
+  bool inLastPage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,12 @@ class _IntroScreenDetailsState extends State<IntroScreenDetails> {
       body: Stack(
         children: [
           PageView(
-            controller: controller,
+            onPageChanged: (index){
+              setState(() {
+                inLastPage = (index == 4);
+              });
+            },
+            controller: _pageController,
             children: [
               IntroScreenWidget(
                 image: "assets/images/marhban.png",
@@ -46,51 +53,11 @@ class _IntroScreenDetailsState extends State<IntroScreenDetails> {
                 title: "Bearish",
                 content: "Praise the name Of your Lord,the Most high",
               ),
-              Column(
-                children: [
-                  IntroScreenWidget(
-                    image: "assets/images/intro6.png",
-                    title: "Holy Quran Radio",
-                    content: """            You can Listen to the holy Quran 
-                              through the Application for Free And Easily""",
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Align(
-                          alignment: Alignment.bottomLeft,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text("Back", style: TextStyles.smallLabel()),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Padding(
-                            padding: const EdgeInsets.all(13.0),
-                            child: Expanded(
-                              child: SmoothPageIndicator(
-                                effect: ExpandingDotsEffect(),
-                                controller: controller,
-                                count: 5,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: TextButton(
-                            onPressed: () {},
-                            child: Text("Finish", style: TextStyles.smallLabel()),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              IntroScreenWidget(
+                image: "assets/images/intro6.png",
+                title: "Holy Quran Radio",
+                content: """            You can Listen to the holy Quran 
+  through the Application for Free And Easily""",
               ),
             ],
           ),
@@ -103,7 +70,12 @@ class _IntroScreenDetailsState extends State<IntroScreenDetails> {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      _pageController.previousPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn,
+                      );
+                    },
                     child: Text("Back", style: TextStyles.smallLabel()),
                   ),
                 ),
@@ -114,7 +86,7 @@ class _IntroScreenDetailsState extends State<IntroScreenDetails> {
                     child: Expanded(
                       child: SmoothPageIndicator(
                         effect: ExpandingDotsEffect(),
-                        controller: controller,
+                        controller: _pageController,
                         count: 5,
                       ),
                     ),
@@ -122,10 +94,29 @@ class _IntroScreenDetailsState extends State<IntroScreenDetails> {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text("Next", style: TextStyles.smallLabel()),
-                  ),
+                  child:
+                  inLastPage
+                          ? TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                HomeScreen.routeName,
+                              );
+                            },
+                            child: Text(
+                              "Finish",
+                              style: TextStyles.smallLabel(),
+                            ),
+                          )
+                          : TextButton(
+                            onPressed: () {
+                              _pageController.nextPage(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeIn,
+                              );
+                            },
+                            child: Text("Next", style: TextStyles.smallLabel()),
+                          ),
                 ),
               ],
             ),

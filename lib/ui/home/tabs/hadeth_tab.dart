@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami_app/core/styles/colors.dart';
+import 'package:islami_app/core/styles/text_styles.dart';
 import 'package:islami_app/model/hadeeth_dm.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:islami_app/ui/hadeeth_details_screen.dart';
-
-import '../../../core/styles/text_styles.dart';
 
 class HadethTab extends StatefulWidget {
   const HadethTab({super.key});
@@ -16,6 +15,12 @@ class HadethTab extends StatefulWidget {
 
 class _HadethTabState extends State<HadethTab> {
   List<HadeethDM> ahadeeth = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAhadeth();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class _HadethTabState extends State<HadethTab> {
                   alignment: Alignment.center,
                   child: Image.asset(
                     "assets/images/Logo.png",
-                    width: mediaQuery.width * 0.7,
+                    width: mediaQuery.width * 0.6,
                   ),
                 ),
                 Expanded(
@@ -97,6 +102,9 @@ class _HadethTabState extends State<HadethTab> {
                                               child: Text(
                                                 hadeth.title,
                                                 textAlign: TextAlign.center,
+                                                style: TextStyles.mediumLabel(
+                                                  textColor: AppColors.black,
+                                                ),
                                               ),
                                             ),
                                             ImageIcon(
@@ -115,11 +123,14 @@ class _HadethTabState extends State<HadethTab> {
                                           child: Text(
                                             hadeth.content,
                                             textAlign: TextAlign.center,
+                                            style: TextStyles.smallLabel(
+                                              textColor: AppColors.black,
+                                            ),
                                           ),
                                         ),
                                       ),
                                       Image.asset(
-                                        "assets/images/img_bottom_decoration.png",
+                                        "assets/images/Mosque-02.png",
                                         color: AppColors.black,
                                       ),
                                     ],
@@ -138,7 +149,7 @@ class _HadethTabState extends State<HadethTab> {
     );
   }
 
-  Future<void> _loadAhadeeth() async {
+  Future<void> _loadAhadeth() async {
     var content = await rootBundle.loadString("assets/files/ahadeeth.txt");
 
     var ahadeethString = content.trim().split("#");
@@ -151,5 +162,6 @@ class _HadethTabState extends State<HadethTab> {
       String content = hadeethLines.join(" ");
       ahadeeth.add(HadeethDM(title, content));
     }
+    setState(() {});
   }
 }

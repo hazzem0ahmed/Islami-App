@@ -4,6 +4,15 @@ import 'colors.dart';
 
 abstract class TextStyles{
 
+  static TextStyle specialFont({Color textColor = AppColors.white}){
+    return TextStyle(
+        fontSize: 40,
+        color: textColor,
+        fontWeight: FontWeight.w900,
+        fontFamily:"jannah"
+    );
+  }
+
   static TextStyle largeTitle({Color textColor = AppColors.gold}){
    return TextStyle(
     fontSize: 24,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:islami_app/core/styles/colors.dart';
+import 'package:islami_app/ui/intro_screen/intro_screen_details.dart';
 import 'home/home_screen.dart';
 
 
@@ -22,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
       const Duration(seconds: 3),
           () => Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) =>  HomeScreen()),
+        MaterialPageRoute(builder: (context) => IntroScreenDetails()),
       ),
     );
   }
