@@ -2,30 +2,41 @@ import 'package:flutter/material.dart';
 
 import '../../../widget/radio_card.dart';
 
-class RadioTabDesign extends StatelessWidget {
+class RadioTabDesign extends StatefulWidget {
   const RadioTabDesign({super.key});
 
   @override
+  State<RadioTabDesign> createState() => _RadioTabDesignState();
+}
+
+class _RadioTabDesignState extends State<RadioTabDesign> {
+  List<RadioCard> radios = [
+    RadioCard(label: "Ibraheem El-Akhdar"),
+    RadioCard(label: "Al-Qaria Yassenr", icon: Icons.pause),
+    RadioCard(label: "Ahmed Al-trabulsi"),
+    RadioCard(label: " Addokali Mohammad Alalim"),
+    RadioCard(label: "Ibraheem El-Akhdar"),
+    RadioCard(label: "Al-Qaria Yassenr"),
+    RadioCard(label: "Ahmed Al-trabulsi"),
+    RadioCard(label: " Addokali Mohammad Alalim"),
+    RadioCard(label: "Ibraheem El-Akhdar"),
+    RadioCard(label: "Al-Qaria Yassenr"),
+    RadioCard(label: "Ahmed Al-trabulsi"),
+    RadioCard(label: " Addokali Mohammad Alalim"),
+  ];
+
+  @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Column(
-          children: [
-            RadioCard(label: "Ibraheem El-Akhdar"),
-            RadioCard(label: "Al-Qaria Yassenr",icon: Icons.pause,),
-            RadioCard(label: "Ahmed Al-trabulsi"),
-            RadioCard(label: " Addokali Mohammad Alalim"),
-            RadioCard(label: "Ibraheem El-Akhdar"),
-            RadioCard(label: "Al-Qaria Yassenr"),
-            RadioCard(label: "Ahmed Al-trabulsi"),
-            RadioCard(label: " Addokali Mohammad Alalim"),
-            RadioCard(label: "Ibraheem El-Akhdar"),
-            RadioCard(label: "Al-Qaria Yassenr"),
-            RadioCard(label: "Ahmed Al-trabulsi"),
-            RadioCard(label: " Addokali Mohammad Alalim"),
-          ],
-        ),
-      ],
+    var size = MediaQuery.sizeOf(context);
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ListView.separated(
+        itemCount: radios.length,
+        separatorBuilder:
+            (context, index) => SizedBox(height: size.height * 0.001),
+        itemBuilder: (context, index) => Column(children: [radios[index]]),
+      ),
     );
   }
 }

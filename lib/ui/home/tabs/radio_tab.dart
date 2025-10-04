@@ -14,9 +14,8 @@ class RadioTab extends StatefulWidget {
 class _RadioTabState extends State<RadioTab>
     with SingleTickerProviderStateMixin {
   int selectedIndex = 0;
-  static const List<Tab> myTabs = <Tab>[Tab(text: 'LEFT'), Tab(text: 'RIGHT')];
 
-  List<Widget> radioTabs = [RadioTab(), RecitersTab()];
+  List<Widget> radioTabs = [RadioTab(), RecitersTabDesign()];
 
   late TabController tabController;
 
@@ -34,7 +33,6 @@ class _RadioTabState extends State<RadioTab>
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.sizeOf(context);
     var mediaQuery = MediaQuery.sizeOf(context);
 
     return Container(
@@ -79,12 +77,13 @@ class _RadioTabState extends State<RadioTab>
                   ),
                   SizedBox(height: mediaQuery.height*0.02,),
                   Expanded(
-                    child: TabBarView(
+                    child:TabBarView(
                         controller: tabController,
-                        children: [
+                        children:[
                           RadioTabDesign(),
-                          RecitersTab(),
-                        ]),
+                          RecitersTabDesign(),
+                        ]
+                    ),
                   ),
                 ],
               ),

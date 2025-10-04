@@ -12,6 +12,7 @@ class RadioCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
