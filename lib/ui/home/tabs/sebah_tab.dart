@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:islami_app/core/styles/text_styles.dart';
 
@@ -10,7 +11,15 @@ class SebahTab extends StatefulWidget {
   State<SebahTab> createState() => _SebahTabState();
 }
 
-class _SebahTabState extends State<SebahTab> {
+class _SebahTabState extends State<SebahTab> with TickerProviderStateMixin {
+  double _turns = 0.0;
+
+  void _rotateImage() {
+    setState(() {
+      _turns += 1.0;
+    });
+  }
+
   late int _sebhaCounter;
   late List<String> _sebhaStrings;
   late int index;
@@ -64,20 +73,29 @@ class _SebahTabState extends State<SebahTab> {
                     width: mediaQuery.width * 0.7,
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 100,
                   child: Image.asset("assets/images/sebhabody2.png"),
                 ),
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: 350,
                       child: GestureDetector(
-                        onTap: _tasbeehIncrement,
+                        onTap: () {
+                          _rotateImage();
+                          _tasbeehIncrement();
+                        },
 
-                        child: Image.asset("assets/images/SebhaBody 1.png"),
+                        child: AnimatedRotation(
+                          turns: _turns,
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.easeInOut,
+
+                          child: Image.asset("assets/images/SebhaBody 1.png"),
+                        ),
                       ),
                     ),
                     Column(
@@ -112,13 +130,11 @@ class _SebahTabState extends State<SebahTab> {
   void _tasbeehIncrement() {
     setState(() {
       _sebhaCounter++;
-      if (index == 0 && _sebhaCounter == 34) {
+      if (index == 0 && _sebhaCounter == 33) {
         index = 1;
-        _sebhaCounter = 0;
-      } else if (index == 1 && _sebhaCounter == 33) {
+      } else if (index == 1 && _sebhaCounter == 66) {
         index = 2;
-        _sebhaCounter = 0;
-      } else if (index == 2 && _sebhaCounter == 33) {
+      } else if (index == 2 && _sebhaCounter == 99) {
         index = 0;
         _sebhaCounter = 0;
       }

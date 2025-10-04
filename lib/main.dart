@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         IntroScreenDetails.routeName:(BuildContext context) => IntroScreenDetails(),
 
       },
-      initialRoute: SplashScreen.routeName,
+      initialRoute: HomeScreen.routeName,
     );
   }
 }
