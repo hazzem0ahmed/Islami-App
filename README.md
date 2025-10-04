@@ -1,6 +1,7 @@
 # islami_app
 
-A new Flutter project.
+App for every muslim who wants to read quran and ahadeeth everywhere and anytime it comes with extra
+features which is sebha with beatiful animation radio for all the quran reciters and prays time
 
 ## Getting Started
 
