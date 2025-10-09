@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami_app/core/styles/colors.dart';
 import 'package:islami_app/core/styles/text_styles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../home/home_screen.dart';
 import '../widget/intro_screen.dart';
@@ -98,10 +99,7 @@ class _IntroScreenDetailsState extends State<IntroScreenDetails> {
                   inLastPage
                           ? TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                HomeScreen.routeName,
-                              );
+                              confirmIsFirst(context);
                             },
                             child: Text(
                               "Finish",
@@ -124,5 +122,11 @@ class _IntroScreenDetailsState extends State<IntroScreenDetails> {
         ],
       ),
     );
+  }
+  Future<void> confirmIsFirst(BuildContext context) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("First", true);
+    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+
   }
 }

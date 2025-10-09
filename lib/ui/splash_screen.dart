@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:islami_app/core/styles/colors.dart';
+import 'package:islami_app/ui/home/home_screen.dart';
 import 'package:islami_app/ui/intro_screen/intro_screen_details.dart';
-
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "/SplashScreen";
@@ -16,17 +16,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  bool? firstOpen;
+
   @override
   void initState() {
     super.initState();
-    Timer(
-      const Duration(seconds: 3),
-          () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => IntroScreenDetails()),
-      ),
-    );
+    isFirst();
+
+    Future.delayed(Duration(seconds: 3), () {
+      String initialRoute =
+          firstOpen == null
+              ? IntroScreenDetails.routeName
+              : HomeScreen.routeName;
+      Navigator.pushReplacementNamed(context, initialRoute);
+    });
   }
+
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
@@ -53,5 +58,11 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-}
 
+  Future<void> isFirst() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    bool? first = prefs.getBool("First");
+    firstOpen = first;
+  }
+}
